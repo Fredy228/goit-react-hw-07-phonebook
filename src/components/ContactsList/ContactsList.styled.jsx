@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const ListContacts = styled.ul`
     margin: 10px 0;
-    width: 300px;
+    max-width: 420px;
 `;
 
 export const ItemContact = styled.li`
@@ -19,7 +19,11 @@ export const Text = styled.p`
 `;
 
 export const Button = styled.button`
-    padding: 3px 5px;
+    width: 70px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 

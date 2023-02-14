@@ -1,17 +1,18 @@
 import {useState} from "react";
 import {From, Input, Label, Button} from './Phonebook.styled';
-import { addNewContact } from 'redux/slice';
+import { addContact } from "redux/contactsOperations";
 import { useSelector, useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { selectContacts } from "redux/seletors";
 
 export const Phonebook = () => {
 
     const [nameContact, setNameContact] = useState('');
     const [number, setNumber] = useState('');
     const dispacth = useDispatch()
-    const contacts = useSelector((state) => state.contacts.items);
+    const contacts = useSelector(selectContacts);
 
-    const addContact = (name, number) => {
+    const addNewContact = (name, number) => {
         const haveContact = contacts.find( contact => contact.name === name || contact.number === number);
         if(haveContact) {
         alert(`${haveContact.name} is already in contacts`)
@@ -21,7 +22,7 @@ export const Phonebook = () => {
             name,
             number
         };
-        dispacth(addNewContact(newContacts));
+        dispacth(addContact(newContacts));
         }
     }
 
@@ -41,7 +42,7 @@ export const Phonebook = () => {
     
     const submitForm = event => {
         event.preventDefault();
-        addContact(nameContact, number);
+        addNewContact(nameContact, number);
         setNameContact('');
         setNumber('');
 
