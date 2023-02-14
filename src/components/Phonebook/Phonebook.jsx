@@ -9,7 +9,7 @@ export const Phonebook = () => {
     const [nameContact, setNameContact] = useState('');
     const [number, setNumber] = useState('');
     const dispacth = useDispatch()
-    const contacts = useSelector((state) => state.contacts.value);
+    const contacts = useSelector((state) => state.contacts.items);
 
     const addContact = (name, number) => {
         const haveContact = contacts.find( contact => contact.name === name || contact.number === number);
