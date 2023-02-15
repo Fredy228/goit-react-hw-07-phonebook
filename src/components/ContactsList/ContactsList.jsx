@@ -2,7 +2,7 @@ import {ListContacts, ItemContact, Button, Text} from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactsOperations';
 import { selectContacts, selectFilter, selectIsLoading } from 'redux/seletors';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { LoaderDelete } from 'components/Loader/Loader';
 
 export const ContactsList = () => {
