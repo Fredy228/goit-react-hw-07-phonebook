@@ -2,7 +2,7 @@ import {ListContacts, ItemContact, Button, Text} from './ContactsList.styled';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteContact } from 'redux/contactsOperations';
 import { selectContacts, selectFilter, selectIsLoading } from 'redux/seletors';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { LoaderDelete } from 'components/Loader/Loader';
 
 export const ContactsList = () => {
@@ -13,15 +13,17 @@ export const ContactsList = () => {
     const isLoading = useSelector(selectIsLoading);
     const idContactDelete = useRef('');
     
-    const findContactsByName = () => {
-        return contacts.filter(contact => contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
+    const renderCondition = () => {
+        if(filter.trim() !== '') {
+            return contacts.filter(contact => contact.name.toLocaleLowerCase().includes(filter.toLocaleLowerCase()));
+        } else {
+            return contacts;
+        }
     }
-
-    let renderCondition = findContactsByName().length > 0 ? (findContactsByName()) : (contacts);
 
     return (
         <ListContacts>
-            {renderCondition.map(({id, name, number}) => {
+            {renderCondition().length > 0 && renderCondition().map(({id, name, number}) => {
                 return (
                     <ItemContact key={id}>
                         <Text>{name}: {number}</Text> 
@@ -35,6 +37,7 @@ export const ContactsList = () => {
                     </ItemContact>
                 )
             })}
+            {renderCondition().length === 0 && <Text>Not found name: {`${filter}`}</Text>}
         </ListContacts>
     )
 }
